@@ -6,12 +6,25 @@ services:
       - "8080:80"
     volumes:
       - C:/Users/ahmed/Desktop/Projects/demo_app:/var/www/html
+    environment:
+      DATABASE_URL: mysql://symfony:secret@database:3306/symfony
+    depends_on:
+      - database
 
-  db:
+  database:
     platform: linux/x86_64
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: symfony
       MYSQL_USER: symfony
       MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root_secret
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: database
       MYSQL_ROOT_PASSWORD: root_secret
