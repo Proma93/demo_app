@@ -7,7 +7,7 @@ services:
     volumes:
       - C:/Users/ahmed/Desktop/Projects/demo_app:/var/www/html
     environment:
-      DATABASE_URL: mysql://symfony:secret@database:3306/symfony
+      DATABASE_URL: mysql://symfony:secret@localhost:3306/symfony
     depends_on:
       - database
 
@@ -19,6 +19,8 @@ services:
       MYSQL_USER: symfony
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: root_secret
+    ports:
+      - "3306:3306"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
